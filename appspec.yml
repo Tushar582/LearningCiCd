@@ -1,14 +1,22 @@
 version: 0.0
 os: linux
+
 files:
- - source: /
-   destination: /home/ec2-user/node-aws-pipeline
+  - source: /
+    destination: /home/ec2-user/react-app   # You can customize this
+
 hooks:
- AfterInstall:
- - location: scripts/after_install.sh
-   timeout: 300
-   runas: root
- ApplicationStart:
- - location: scripts/application_start.sh
-   timeout: 300
-   runas: root
+  BeforeInstall:
+    - location: scripts/clean.sh
+      timeout: 60
+      runas: ec2-user
+
+  AfterInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: ec2-user
+
+  ApplicationStart:
+    - location: scripts/deploy.sh
+      timeout: 300
+      runas: ec2-user
