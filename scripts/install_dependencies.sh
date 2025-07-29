@@ -1,14 +1,14 @@
 #!/bin/bash
-set -ex  # exit on error, print commands
+set -ex
 
 LOGFILE=/tmp/install_dependencies.log
 exec > >(tee -a $LOGFILE) 2>&1
 
 echo "Starting install_dependencies.sh"
 
-# Use yum instead of apt-get
+# Update packages and install curl, tar with conflict resolution
 sudo yum update -y
-sudo yum install -y curl tar
+sudo yum install -y curl tar --allowerasing
 
 NODE_VERSION="v22.13.1"
 NODE_DISTRO="linux-x64"
