@@ -6,11 +6,11 @@ exec > >(tee -a $LOGFILE) 2>&1
 
 echo "Starting install_dependencies.sh"
 
-# Update and install required tools
+# Update and install tools
 sudo yum update -y
 sudo yum install -y curl tar --allowerasing
 
-# Download Node.js to a writable directory
+# Node.js setup
 NODE_VERSION="v22.13.1"
 NODE_DISTRO="linux-x64"
 NODE_TARFILE="node-${NODE_VERSION}-${NODE_DISTRO}.tar.xz"
@@ -19,10 +19,11 @@ TEMP_DIR="/tmp"
 
 cd $TEMP_DIR
 curl -O https://nodejs.org/dist/${NODE_VERSION}/${NODE_TARFILE}
-
-# Extract to /usr/local
 sudo tar -xJf ${NODE_TARFILE} -C ${INSTALL_DIR} --strip-components=1
 rm -f ${NODE_TARFILE}
+
+# Add Node to current PATH
+export PATH=$INSTALL_DIR/bin:$PATH
 
 # Verify
 node -v
