@@ -6,9 +6,9 @@ exec > >(tee -a $LOGFILE) 2>&1
 
 echo "Starting install_dependencies.sh"
 
-# Your existing commands, e.g.:
-sudo apt-get update
-sudo apt-get install -y curl tar
+# Use yum instead of apt-get
+sudo yum update -y
+sudo yum install -y curl tar
 
 NODE_VERSION="v22.13.1"
 NODE_DISTRO="linux-x64"
