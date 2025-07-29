@@ -25,9 +25,12 @@ rm -f ${NODE_TARFILE}
 # Add Node to current PATH
 export PATH=$INSTALL_DIR/bin:$PATH
 
-# Verify
+# Verify Node.js installation
 node -v
 npm -v
+
+# Fix ownership of the app directory
+sudo chown -R ec2-user:ec2-user /home/ec2-user/react-app
 
 # Build app
 cd /home/ec2-user/react-app
